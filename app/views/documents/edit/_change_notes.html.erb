@@ -1,3 +1,18 @@
+<% textarea = capture do %>
+
+    <%= render "govuk_publishing_components/components/textarea", {
+      label: {
+        text: t("documents.edit.change_note.title"),
+        bold: true
+      },
+      name: "document[change_note]",
+      value: @document.change_note,
+      rows: 4,
+      data: {
+        "contextual-guidance": "change-note-guidance"
+      }
+    } %>
+<% end %>
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
     <% legend_text = tag.p(
@@ -13,7 +28,7 @@
           {
             value: "minor",
             text: t("documents.edit.update_type.minor_name"),
-            conditional: tag.p(t("documents.edit.update_type.minor_hint"), class: "govuk-body"),
+            conditional: textarea,
             checked: @document.update_type == "minor",
           },
           {
@@ -26,6 +41,17 @@
       } %>
     <% end %>
   </div>
+  <div class="govuk-grid-column-one-third">
+    <%= render "components/contextual_guidance", {
+      id: "change-note-guidance",
+      title: t("documents.edit.change_note.guidance_title"),
+    } do %>
+      <%= render "govuk_publishing_components/components/govspeak" do %>
+        <%= govspeak_to_html t("documents.edit.change_note.guidance") %>
+      <% end %>
+    <% end %>
+  </div>
+
 </div>
 
 <div class="govuk-grid-row">
