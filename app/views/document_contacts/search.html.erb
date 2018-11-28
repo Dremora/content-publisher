@@ -4,7 +4,7 @@
 <%
   contact_options = @contacts_by_organisation.flat_map do |org|
     org["contacts"].map do |contact|
-      ["#{contact['title']} - #{org['name']}", contact["content_id"]]
+      ["#{contact['title']}<span class='govuk-hint'>#{org['name']}</span>", contact["content_id"]]
     end
   end
 %>
@@ -25,4 +25,3 @@
     text: "Insert contact", margin_bottom: true
   } %>
 <% end %>
-
