@@ -12,10 +12,23 @@
         id: "retirement_explanatory_note",
         name: "explanatory_note",
         rows: 2,
+        data: {
+          "contextual-guidance": "retirement-explanatory-note-guidance",
+        }
       }%>
       <%= render "govuk_publishing_components/components/button", {
         text: "Save", margin_bottom: true
       } %>
   <% end %>
+  </div>
+  <div class="govuk-grid-column-one-third">
+    <%= render "components/contextual_guidance", {
+      id: "retirement-explanatory-note-guidance",
+      title: t("retire_document.retire.explanatory_note.guidance_title"),
+    } do %>
+      <%= render "govuk_publishing_components/components/govspeak" do %>
+        <%= govspeak_to_html t("retire_document.retire.explanatory_note.guidance") %>
+      <% end %>
+    <% end %>
   </div>
 </div>

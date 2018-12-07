@@ -29,6 +29,8 @@ RSpec.feature "Retire a document" do
 
   def when_i_fill_in_the_explanatory_note
     fill_in "explanatory_note", with: "An explanation"
+    expect(page).to have_content(I18n.t!("retire_document.retire.explanatory_note.guidance_title"))
+    expect(page).to have_content(I18n.t!("retire_document.retire.explanatory_note.guidance"))
   end
 
   def and_click_on_save

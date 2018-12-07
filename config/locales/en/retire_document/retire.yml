@@ -4,3 +4,5 @@ en:
       title: "Retire '%{title}'"
       explanatory_note:
         title: "Explanatory note"
+        guidance_title: Add explanatory note
+        guidance: This note will appear on the page, explaining why a document is out of date.
