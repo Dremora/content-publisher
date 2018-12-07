@@ -2,7 +2,7 @@
 
 require "mini_magick"
 
-class ImageNormaliser
+class ImageUploader::Normaliser
   def initialize(image_path)
     @image = MiniMagick::Image.open(image_path)
     @output = Tempfile.new

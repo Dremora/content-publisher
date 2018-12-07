@@ -2,7 +2,7 @@
 
 require "mini_magick"
 
-class ImageUploadRequirements
+class ImageUploader::Requirements
   include ActionView::Helpers::NumberHelper
 
   SUPPORTED_FORMATS = %w(image/jpeg image/png image/gif).freeze
@@ -30,7 +30,7 @@ class ImageUploadRequirements
                          max_size: number_to_human_size(MAX_FILE_SIZE))
     end
 
-    dimensions = ImageNormaliser.new(file.path).dimensions
+    dimensions = ImageUploader::Normaliser.new(file.path).dimensions
 
     if dimensions[:width] < Image::WIDTH || dimensions[:height] < Image::HEIGHT
       messages << I18n.t!("document_images.index.flashes.upload_requirements.min_dimensions",

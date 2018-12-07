@@ -12,7 +12,7 @@ class DocumentImagesController < ApplicationController
 
   def create
     @document = Document.find_by_param(params[:document_id])
-    @errors = ImageUploadRequirements.new(params[:image]).errors
+    @errors = ImageUploader::Requirements.new(params[:image]).errors
 
     if @errors.any?
       flash.now["alert_with_items"] = {

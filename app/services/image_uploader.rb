@@ -35,7 +35,7 @@ private
   end
 
   def image_normaliser
-    @image_normaliser ||= ImageNormaliser.new(file.path)
+    @image_normaliser ||= Normaliser.new(file.path)
   end
 
   def image_attributes
