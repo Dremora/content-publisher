@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   post "/documents/:id/create-preview" => "preview#create", as: :create_preview
 
   get "/documents/:id/retire" => "retire_document#create", as: :retire_document
+  post "/documents/:id/retire" => "retire_document#new", as: :new_retirement
   get "/documents/:id/remove" => "remove_document#remove", as: :remove_document
 
   get "/documents/:document_id/images" => "document_images#index", as: :document_images

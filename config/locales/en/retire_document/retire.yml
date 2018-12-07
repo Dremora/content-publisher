@@ -2,3 +2,5 @@ en:
   retire_document:
     retire:
       title: "Retire '%{title}'"
+      explanatory_note:
+        title: "Explanatory note"

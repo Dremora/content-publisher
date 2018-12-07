@@ -3,5 +3,19 @@
 
 <div class="govuk-grid-row">
   <div class="govuk-grid-column-two-thirds">
+    <%= form_tag(new_retirement_path(@document)) do %>
+      <%= render "govuk_publishing_components/components/textarea", {
+        label: {
+          text: t("retire_document.retire.explanatory_note.title"),
+          bold: true
+        },
+        id: "retirement_explanatory_note",
+        name: "explanatory_note",
+        rows: 2,
+      }%>
+      <%= render "govuk_publishing_components/components/button", {
+        text: "Save", margin_bottom: true
+      } %>
+  <% end %>
   </div>
 </div>
