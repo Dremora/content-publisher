@@ -25,9 +25,6 @@ class DocumentImagesController < ApplicationController
     end
 
     image = ImageUploader.new(params[:image]).upload(@document)
-    image.asset_manager_file_url = upload_image_to_asset_manager(image)
-
-    image.save!
     redirect_to crop_document_image_path(params[:document_id], image.id, wizard: params[:wizard])
   end
 
