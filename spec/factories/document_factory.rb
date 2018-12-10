@@ -25,5 +25,11 @@ FactoryBot.define do
       has_live_version_on_govuk { true }
       publication_state { "sent_to_live" }
     end
+
+    trait :retired do
+      has_live_version_on_govuk { true }
+      publication_state { "sent_to_live" }
+      live_state { "retired" }
+    end
   end
 end

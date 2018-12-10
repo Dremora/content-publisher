@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class RetireDocumentController < ApplicationController
+  before_action { authorise_user!(User::MANAGING_EDITOR_PERMISSION) }
+
   def create
     @document = Document.find_by_param(params[:id])
   end

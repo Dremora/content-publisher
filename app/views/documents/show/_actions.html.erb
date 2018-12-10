@@ -56,10 +56,11 @@
       <%= form_tag create_document_edition_path(@document) do %>
         <%= render "govuk_publishing_components/components/button", text: "Create new edition", data_attributes: { gtm: "create-new-edition" } %>
       <% end %>
-
-      <%= link_to "Retire", retire_document_path(@document), class: "govuk-link govuk-link--no-visited-state" %>
-      <%= link_to "Remove", remove_document_path(@document), class: "govuk-link app-link--destructive app-link--right" %>
-    <% elsif @document.user_facing_state == "retired" %>
+      <% if current_user.has_permission?(User::MANAGING_EDITOR_PERMISSION) %>
+        <%= link_to "Retire", retire_document_path(@document), class: "govuk-link govuk-link--no-visited-state" %>
+        <%= link_to "Remove", remove_document_path(@document), class: "govuk-link app-link--destructive app-link--right" %>
+      <% end %>
+    <% elsif @document.user_facing_state == "retired" && current_user.has_permission?(User::MANAGING_EDITOR_PERMISSION) %>
       <%= link_to "Update reason for retiring", retire_document_path(@document), class: "govuk-link govuk-link--no-visited-state" %>
     <% elsif @document.user_facing_state == "removed" %>
       <%= form_tag create_document_edition_path(@document) do %>
@@ -83,7 +84,9 @@
     <% end %>
 
     <% if @document.has_live_version_on_govuk? %>
-      <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
+      <% unless @document.user_facing_state == "retired" && !current_user.has_permission?(User::MANAGING_EDITOR_PERMISSION) %>
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible" />
+      <% end %>
       <%= link_to "View published edition on GOV.UK", DocumentUrl.new(@document).public_url, class: "govuk-link govuk-link--no-visited-state" %>
     <% end %>
   </div>
