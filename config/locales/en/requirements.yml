@@ -46,3 +46,8 @@ en:
       too_long:
         form_message: "Enter an image caption that is fewer than %{max_length} characters long"
         summary_message: "Enter a shorter caption for ‘%{filename}’"
+    explanatory_note:
+      too_long:
+        form_message: "Enter an explanatory note that is fewer than %{max_length} characters long"
+      blank:
+        form_message: Enter an explanatory note
