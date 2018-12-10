@@ -9,6 +9,9 @@ RSpec.feature "Retire a document" do
     when_i_fill_in_the_explanatory_note
     and_click_on_save
     then_i_see_the_document_has_been_retired
+
+    when_i_click_to_update_the_explanatory_note
+    then_i_can_edit_the_explanatory_note
   end
 
   def given_there_is_a_published_document
@@ -46,5 +49,18 @@ RSpec.feature "Retire a document" do
     expect(timeline_entry.retirement.explanatory_note).to eq("An explanation")
     expect(@document.reload.live_state).to eq("retired")
     expect(page).to have_content(I18n.t!("user_facing_states.retired.name"))
+  end
+
+  def when_i_click_to_update_the_explanatory_note
+    click_on "Update reason for retiring"
+  end
+
+  def then_i_can_edit_the_explanatory_note
+    explanation = "A different explanation"
+    body = { type: "withdrawal", explanation: explanation, locale: @document.locale }
+    stub_publishing_api_unpublish(@document.content_id, body: body)
+    fill_in "explanatory_note", with: explanation
+    click_on "Save"
+    expect(Retirement.last.explanatory_note).to eq(explanation)
   end
 end
