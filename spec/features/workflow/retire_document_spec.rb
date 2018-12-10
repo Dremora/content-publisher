@@ -11,6 +11,7 @@ RSpec.feature "Retire a document" do
     then_i_see_the_document_has_been_retired
 
     when_i_click_to_update_the_explanatory_note
+    then_i_can_see_the_existing_explanatory_note
     then_i_can_edit_the_explanatory_note
   end
 
@@ -53,6 +54,10 @@ RSpec.feature "Retire a document" do
 
   def when_i_click_to_update_the_explanatory_note
     click_on "Update reason for retiring"
+  end
+
+  def then_i_can_see_the_existing_explanatory_note
+    expect(page).to have_field("explanatory_note", with: Retirement.last.explanatory_note)
   end
 
   def then_i_can_edit_the_explanatory_note
