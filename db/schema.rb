@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_07_101337) do
+ActiveRecord::Schema.define(version: 2018_12_10_200345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,16 +44,16 @@ ActiveRecord::Schema.define(version: 2018_12_07_101337) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.json "contents", default: {}
-    t.string "base_path"
     t.text "summary"
+    t.string "base_path"
     t.json "tags", default: {}
     t.string "publication_state", null: false
     t.bigint "creator_id"
     t.string "review_state", null: false
-    t.bigint "lead_image_id"
     t.boolean "has_live_version_on_govuk", default: false, null: false
     t.text "change_note"
     t.string "update_type"
+    t.bigint "lead_image_id"
     t.integer "current_edition_number", null: false
     t.bigint "last_editor_id"
     t.string "live_state"
@@ -127,6 +127,18 @@ ActiveRecord::Schema.define(version: 2018_12_07_101337) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "versioned_documents", force: :cascade do |t|
+    t.uuid "content_id", null: false
+    t.string "locale", null: false
+    t.string "document_type_id", null: false
+    t.datetime "last_edited_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "created_by_id"
+    t.index ["content_id", "locale"], name: "index_versioned_documents_on_content_id_and_locale", unique: true
+    t.index ["created_by_id"], name: "index_versioned_documents_on_created_by_id"
+  end
+
   create_table "versions", force: :cascade do |t|
     t.string "item_type", null: false
     t.integer "item_id", null: false
@@ -147,4 +159,5 @@ ActiveRecord::Schema.define(version: 2018_12_07_101337) do
   add_foreign_key "retirements", "timeline_entries", column: "timeline_entries_id", on_delete: :cascade
   add_foreign_key "timeline_entries", "documents", on_delete: :cascade
   add_foreign_key "timeline_entries", "users", on_delete: :restrict
+  add_foreign_key "versioned_documents", "users", column: "created_by_id", on_delete: :restrict
 end
