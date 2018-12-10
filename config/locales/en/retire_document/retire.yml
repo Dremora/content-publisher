@@ -6,3 +6,5 @@ en:
         title: "Explanatory note"
         guidance_title: Add explanatory note
         guidance: This note will appear on the page, explaining why a document is out of date.
+      flashes:
+        requirements: You need to
