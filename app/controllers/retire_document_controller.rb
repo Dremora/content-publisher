@@ -23,6 +23,12 @@ class RetireDocumentController < ApplicationController
     end
 
     DocumentUnpublishingService.new.retire(@document, explanatory_note)
+  rescue GdsApi::BaseError => e
+    GovukError.notify(e)
+    redirect_to retire_document_path(@document),
+      alert_with_description: t("retire_document.retire.flashes.publishing_api_error"),
+      explanatory_note: explanatory_note
+  else
     redirect_to @document
   end
 end
