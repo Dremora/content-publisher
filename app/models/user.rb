@@ -9,4 +9,5 @@ class User < ApplicationRecord
 
   PRE_RELEASE_FEATURES_PERMISSION = "pre_release_features"
   DEBUG_PERMISSION = "debug"
+  VERSIONING_PERMISSION = "versioning"
 end
