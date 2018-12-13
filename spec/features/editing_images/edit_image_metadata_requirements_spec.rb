@@ -19,7 +19,6 @@ RSpec.feature "Edit image metadata with requirements issues" do
   end
 
   def and_i_edit_the_image_with_bad_metadata
-    @request = stub_publishing_api_put_content(Document.last.content_id, {})
     click_on "Edit details"
     fill_in "alt_text", with: ""
     click_on "Save details"

@@ -19,7 +19,7 @@ class ImageUpdateService
     end
 
     if need_to_update_asset_manager?
-      update_in_asset_manager(image)
+      image.asset_manager_file_url = update_in_asset_manager(image)
     end
 
     image.save!

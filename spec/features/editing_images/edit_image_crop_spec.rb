@@ -37,9 +37,10 @@ RSpec.feature "Edit image crop", js: true do
     bottom_right_handle = find(".cropper-point.point-se")
     bottom_right_handle.drag_to(find(".govuk-heading-l"))
 
-    @asset_update_request = asset_manager_update_asset(@image.asset_manager_id)
-    @publishing_api_request = stub_any_publishing_api_put_content
+    @asset_update_request = asset_manager_update_asset(@image.asset_manager_id,
+                                                       file_url: @image.asset_manager_file_url)
 
+    @publishing_api_request = stub_any_publishing_api_put_content
     click_on "Crop image"
   end
 

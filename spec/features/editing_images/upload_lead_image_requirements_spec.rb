@@ -28,7 +28,7 @@ RSpec.feature "Upload a lead image with requirements issues" do
   end
 
   def and_i_crop_the_image
-    asset_manager_update_asset(@asset_id)
+    asset_manager_update_asset(@asset_id, file_url: @asset_url)
     stub_publishing_api_put_content(Document.last.content_id, {})
     click_on "Crop image"
   end

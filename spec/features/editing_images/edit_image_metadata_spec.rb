@@ -20,8 +20,11 @@ RSpec.feature "Edit image metadata" do
   end
 
   def and_i_edit_the_image_metadata
-    @asset_update_request = asset_manager_update_asset(@image.asset_manager_id)
+    @asset_update_request = asset_manager_update_asset(@image.asset_manager_id,
+                                                       file_url: @image.asset_manager_file_url)
+
     @publishing_api_request = stub_publishing_api_put_content(Document.last.content_id, {})
+
     click_on "Edit details"
     fill_in "filename", with: "new-filename.jpg"
     fill_in "alt_text", with: "Some alt text"

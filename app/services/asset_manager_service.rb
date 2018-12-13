@@ -18,7 +18,8 @@ class AssetManagerService
 
   def update_bytes(asset, content)
     file = AssetManagerFile.from_bytes(asset, content)
-    GdsApi.asset_manager.update_asset(asset.asset_manager_id, file: file)
+    update = GdsApi.asset_manager.update_asset(asset.asset_manager_id, file: file)
+    update["file_url"]
   end
 
   def delete(asset)
