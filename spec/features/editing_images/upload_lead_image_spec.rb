@@ -37,7 +37,7 @@ RSpec.feature "Upload a lead image" do
   end
 
   def and_i_fill_in_the_metadata
-    fill_in "filename", with: "new-filename.jpg"
+    fill_in "filename", with: "New filename.jpg"
     fill_in "alt_text", with: "Some alt text"
     fill_in "caption", with: "A caption"
     fill_in "credit", with: "A credit"

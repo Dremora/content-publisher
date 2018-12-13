@@ -26,7 +26,7 @@ RSpec.feature "Edit image metadata" do
     @publishing_api_request = stub_publishing_api_put_content(Document.last.content_id, {})
 
     click_on "Edit details"
-    fill_in "filename", with: "new-filename.jpg"
+    fill_in "filename", with: "New filename.jpg"
     fill_in "alt_text", with: "Some alt text"
     fill_in "caption", with: "A caption"
     fill_in "credit", with: "A credit"

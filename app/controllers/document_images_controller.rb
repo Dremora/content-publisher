@@ -60,7 +60,7 @@ class DocumentImagesController < ApplicationController
   def update
     @document = Document.find_by_param(params[:document_id])
     @image = @document.images.find(params[:image_id])
-    @image.assign_attributes(update_params)
+    @image.assign_attributes(update_params(@image))
     @issues = Requirements::ImageChecker.new(@image).pre_preview_metadata_issues
 
     if @issues.any?
@@ -123,8 +123,8 @@ class DocumentImagesController < ApplicationController
 
 private
 
-  def update_params
-    params.permit(:filename, :caption, :alt_text, :credit)
+  def update_params(image)
+    ImageUpdateParams.new(image).call(params.permit(:filename, :caption, :alt_text, :credit))
   end
 
   def update_crop_params
