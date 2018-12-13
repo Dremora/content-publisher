@@ -9,7 +9,7 @@
     <%= t("document_images.index.lead_image") %>
   </h2>
 
-  <% unless image.publication_state == "sent_to_live" %>
+  <% unless image.publication_state == "live" %>
     <% actions << link_to("Edit crop", crop_document_image_path(@document, image), class: "govuk-link") %>
     <% actions << link_to("Edit details", edit_document_image_path(@document, image), class: "govuk-link") %>
 
