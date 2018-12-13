@@ -19,10 +19,7 @@ class ImageUpdateService
     end
 
     if need_to_update_asset_manager?
-      asset_manager_file_url = upload_to_asset_manager(image)
-      AssetManagerService.new.delete(image)
-      image.asset_manager_file_url = asset_manager_file_url
-      image.publication_state = "draft"
+      update_in_asset_manager(image)
     end
 
     image.save!
@@ -30,11 +27,12 @@ class ImageUpdateService
 
 private
 
-  def upload_to_asset_manager(image)
-    AssetManagerService.new.upload_bytes(image, image.cropped_bytes)
+  def update_in_asset_manager(image)
+    AssetManagerService.new.update_bytes(image, image.cropped_bytes)
   end
 
   def need_to_update_asset_manager?
+    return true if filename_changed?
     (image.changed_attributes.keys & CROP_ATTRIBUTES).any?
   end
 
