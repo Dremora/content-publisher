@@ -124,7 +124,7 @@ class DocumentImagesController < ApplicationController
 private
 
   def update_params
-    params.permit(:caption, :alt_text, :credit)
+    params.permit(:filename, :caption, :alt_text, :credit)
   end
 
   def update_crop_params

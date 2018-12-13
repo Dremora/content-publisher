@@ -14,6 +14,10 @@ class ImageUpdateService
       raise "Cannot edit live images"
     end
 
+    if filename_changed?
+      image.blob.update!(filename: image.filename)
+    end
+
     if need_to_update_asset_manager?
       asset_manager_file_url = upload_to_asset_manager(image)
       AssetManagerService.new.delete(image)
@@ -32,5 +36,9 @@ private
 
   def need_to_update_asset_manager?
     (image.changed_attributes.keys & CROP_ATTRIBUTES).any?
+  end
+
+  def filename_changed?
+    image.changed_attributes.keys.include?("filename")
   end
 end

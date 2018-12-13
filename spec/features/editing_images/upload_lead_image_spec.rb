@@ -37,6 +37,7 @@ RSpec.feature "Upload a lead image" do
   end
 
   def and_i_fill_in_the_metadata
+    fill_in "filename", with: "new-filename.jpg"
     fill_in "alt_text", with: "Some alt text"
     fill_in "caption", with: "A caption"
     fill_in "credit", with: "A credit"
@@ -45,10 +46,10 @@ RSpec.feature "Upload a lead image" do
   end
 
   def then_i_see_the_new_lead_image
-    expect(page).to have_content(I18n.t!("documents.show.flashes.lead_image.added", file: Image.last.filename))
+    expect(page).to have_content(I18n.t!("documents.show.flashes.lead_image.added", file: "new-filename.jpg"))
     expect(page).to have_content("A caption")
     expect(page).to have_content("A credit")
-    expect(find("#lead-image img")["src"]).to include("1000x1000.jpg")
+    expect(find("#lead-image img")["src"]).to include("new-filename.jpg")
     expect(find("#lead-image img")["alt"]).to eq("Some alt text")
     expect(page).to have_content(I18n.t!("documents.history.entry_types.lead_image_updated"))
     expect(page).to have_content(I18n.t!("documents.history.entry_types.image_updated"))
