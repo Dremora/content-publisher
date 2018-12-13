@@ -36,9 +36,13 @@ RSpec.feature "Edit image metadata" do
   def then_i_see_the_image_is_updated
     expect(@asset_update_request).to have_been_requested
     expect(page).to have_content(I18n.t!("document_images.index.flashes.details_edited", file: "new-filename.jpg"))
-    expect(page).to have_content("Some alt text")
-    expect(page).to have_content("A caption")
-    expect(page).to have_content("A credit")
+
+    within(".app-c-image-meta") do
+      expect(page).to have_content("Some alt text")
+      expect(page).to have_content("A caption")
+      expect(page).to have_content("A credit")
+      expect(page).to have_content("new-filename.jpg")
+    end
   end
 
   def and_the_preview_creation_succeeded

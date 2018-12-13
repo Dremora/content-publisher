@@ -1,13 +1,8 @@
 <%
   id ||= "image-meta-#{SecureRandom.hex(4)}"
-  alt_text ||= nil
   actions ||= []
   meta ||= {}
   actions ||= []
-
-  if meta.key?(:alt_text)
-    alt_text = meta[:alt_text]
-  end
 %>
 <div class="app-c-image-meta" id="<%= id %>">
   <div class="govuk-grid-row">
@@ -15,7 +10,7 @@
 
       <%= tag.img class: "app-c-image-meta__image",
         src: src,
-        alt: alt_text
+        alt: meta[:alt_text]
       %>
 
     </div>
@@ -24,6 +19,10 @@
         <%= render "components/metadata", {
           inline: true,
           items: [
+            {
+              field: t("documents.show.lead_image.fields.filename"),
+              value: meta[:filename]
+            },
             {
               field: t("documents.show.lead_image.fields.alt_text"),
               value: meta[:alt_text]

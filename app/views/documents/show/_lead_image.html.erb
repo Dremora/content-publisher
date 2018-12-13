@@ -3,6 +3,7 @@
     <%= render "components/image_meta", {
       src: url_for(@document.lead_image.thumbnail),
       meta: {
+        filename: @document.lead_image.filename,
         alt_text: @document.lead_image.alt_text,
         caption: @document.lead_image.caption,
         credit: @document.lead_image.credit

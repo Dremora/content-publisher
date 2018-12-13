@@ -38,6 +38,7 @@ en:
         no_lead_image: No image selected. The default image for your department will be used.
         upload_image: Upload an image
         fields:
+          filename: Filename
           alt_text: Alt text
           caption: Image caption
           credit: Image credit
