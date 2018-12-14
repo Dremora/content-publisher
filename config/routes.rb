@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get "/documents/:id/retire" => "retire_document#retire", as: :retire_document
   get "/documents/:id/remove" => "remove_document#remove", as: :remove_document
 
+  post "/documents/:id/internal_notes" => "internal_notes#create", as: :create_internal_note
+
   get "/documents/:document_id/images" => "document_images#index", as: :document_images
   post "/documents/:document_id/images" => "document_images#create", as: :create_document_image
   get "/documents/:document_id/images/:image_id/download" => "document_images#download", as: :download_image
